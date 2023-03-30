@@ -74,12 +74,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.apis</groupId>
-            <artifactId>google-api-services-dialogflow</artifactId>
-            <version>v3-rev20230304-2.0.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-dialogflow</artifactId>
             <version>4.18.0</version>

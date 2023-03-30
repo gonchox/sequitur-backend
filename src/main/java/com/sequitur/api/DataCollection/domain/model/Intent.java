@@ -1,5 +1,6 @@
 package com.sequitur.api.DataCollection.domain.model;
 
+import ch.qos.logback.classic.spi.LoggingEventVO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -54,4 +55,5 @@ public class Intent {
     public void setResponses(List<Response> responses) {
         this.responses = responses;
     }
+
 }
