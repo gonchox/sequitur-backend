@@ -5,19 +5,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.UUID;
+
 public interface ResponseService {
 
-    ResponseEntity<?> deleteResponse(Long responseId, Long intentId);
+    ResponseEntity<?> deleteResponse(Long responseId, UUID intentId);
 
-    Response updateResponse(Long responseId, Long intentId, Response responseRequest);
+    Response updateResponse(Long responseId, UUID intentId, Response responseRequest);
 
-    Response createResponse(Long intentId, Response response);
+    Response createResponse(UUID intentId, Response response);
 
     Response getResponseById(Long responseId);
 
     Page<Response> getAllResponses(Pageable pageable);
 
-    Page<Response> getAllResponsesByIntentId(Long intentId, Pageable pageable);
+    Page<Response> getAllResponsesByIntentId(UUID intentId, Pageable pageable);
 
-    Response getResponseByIdAndIntentId(Long intentId, Long responseId);
+    Response getResponseByIdAndIntentId(UUID intentId, Long responseId);
 }

@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ResponseServiceImpl implements ResponseService {
 
@@ -22,7 +24,7 @@ public class ResponseServiceImpl implements ResponseService {
     private IntentRepository intentRepository;
 
     @Override
-    public ResponseEntity<?> deleteResponse(Long responseId,Long intentId) {
+    public ResponseEntity<?> deleteResponse(Long responseId,UUID intentId) {
         Response response = responseRepository.findById(responseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Response", "Id", responseId));
         responseRepository.delete(response);
@@ -30,7 +32,7 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public Response updateResponse(Long responseId,Long intentId, Response responseRequest) {
+    public Response updateResponse(Long responseId,UUID intentId, Response responseRequest) {
         Response response = responseRepository.findById(responseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Response", "Id", responseId));
         response.setMessageText(responseRequest.getMessageText());
@@ -39,7 +41,7 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public Response createResponse(Long intentId, Response response) {
+    public Response createResponse(UUID intentId, Response response) {
         Intent intent = intentRepository.findById(intentId).orElseThrow(() -> new ResourceNotFoundException("Intent", "Id", intentId));
         response.setIntent(intent);
         return responseRepository.save(response);
@@ -57,12 +59,12 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public Page<Response> getAllResponsesByIntentId(Long intentId, Pageable pageable) {
+    public Page<Response> getAllResponsesByIntentId(UUID intentId, Pageable pageable) {
         return responseRepository.findByIntentId(intentId, pageable);
     }
 
     @Override
-    public Response getResponseByIdAndIntentId(Long intentId, Long responseId) {
+    public Response getResponseByIdAndIntentId(UUID intentId, Long responseId) {
         return responseRepository.findByIdAndIntentId(responseId, intentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Response not found with Id " + responseId +

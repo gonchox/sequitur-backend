@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class TrainingPhraseServiceImpl implements TrainingPhraseService {
 
@@ -23,7 +25,7 @@ public class TrainingPhraseServiceImpl implements TrainingPhraseService {
     private IntentRepository intentRepository;
 
     @Override
-    public ResponseEntity<?> deleteTrainingPhrase(Long trainingPhraseId, Long intentId) {
+    public ResponseEntity<?> deleteTrainingPhrase(Long trainingPhraseId, UUID intentId) {
         TrainingPhrase trainingPhrase = trainingPhraseRepository.findById(trainingPhraseId)
                 .orElseThrow(() -> new ResourceNotFoundException("TrainingPhrase", "Id", trainingPhraseId));
         trainingPhraseRepository.delete(trainingPhrase);
@@ -31,7 +33,7 @@ public class TrainingPhraseServiceImpl implements TrainingPhraseService {
     }
 
     @Override
-    public TrainingPhrase updateTrainingPhrase(Long trainingPhraseId, Long intentId, TrainingPhrase trainingPhraseRequest) {
+    public TrainingPhrase updateTrainingPhrase(Long trainingPhraseId, UUID intentId, TrainingPhrase trainingPhraseRequest) {
         TrainingPhrase trainingPhrase = trainingPhraseRepository.findById(trainingPhraseId)
                 .orElseThrow(() -> new ResourceNotFoundException("TrainingPhrase", "Id", trainingPhraseId));
         trainingPhrase.setText(trainingPhraseRequest.getText());
@@ -40,7 +42,7 @@ public class TrainingPhraseServiceImpl implements TrainingPhraseService {
     }
 
     @Override
-    public TrainingPhrase createTrainingPhrase(Long intentId, TrainingPhrase trainingPhrase) {
+    public TrainingPhrase createTrainingPhrase(UUID intentId, TrainingPhrase trainingPhrase) {
         Intent intent = intentRepository.findById(intentId).orElseThrow(() -> new ResourceNotFoundException("Intent", "Id", intentId));
         trainingPhrase.setIntent(intent);
         return trainingPhraseRepository.save(trainingPhrase);
@@ -58,12 +60,12 @@ public class TrainingPhraseServiceImpl implements TrainingPhraseService {
     }
 
     @Override
-    public Page<TrainingPhrase> getAllTrainingPhrasesByIntentId(Long intentId, Pageable pageable) {
+    public Page<TrainingPhrase> getAllTrainingPhrasesByIntentId(UUID intentId, Pageable pageable) {
         return trainingPhraseRepository.findByIntentId(intentId, pageable);
     }
 
     @Override
-    public TrainingPhrase getTrainingPhraseByIdAndIntentId(Long intentId, Long trainingPhraseId) {
+    public TrainingPhrase getTrainingPhraseByIdAndIntentId(UUID intentId, Long trainingPhraseId) {
         return trainingPhraseRepository.findByIdAndIntentId(trainingPhraseId, intentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "TrainingPhrase not found with Id " + trainingPhraseId +

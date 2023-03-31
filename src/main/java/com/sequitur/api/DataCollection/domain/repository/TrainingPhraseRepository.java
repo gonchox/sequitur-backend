@@ -8,11 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface TrainingPhraseRepository extends JpaRepository<TrainingPhrase, Long> {
 
-    Page<TrainingPhrase> findByIntentId(Long intentId, Pageable pageable);
+    Page<TrainingPhrase> findByIntentId(UUID intentId, Pageable pageable);
 
-    Optional<TrainingPhrase> findByIdAndIntentId(Long id, Long intentId);
+    Optional<TrainingPhrase> findByIdAndIntentId(Long id, UUID intentId);
 }

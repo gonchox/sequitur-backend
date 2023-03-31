@@ -6,19 +6,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.UUID;
+
 public interface TrainingPhraseService {
 
-    ResponseEntity<?> deleteTrainingPhrase(Long trainingPhraseId, Long intentId);
+    ResponseEntity<?> deleteTrainingPhrase(Long trainingPhraseId, UUID intentId);
 
-    TrainingPhrase updateTrainingPhrase(Long trainingPhraseId,Long intentId, TrainingPhrase trainingPhraseRequest);
+    TrainingPhrase updateTrainingPhrase(Long trainingPhraseId,UUID intentId, TrainingPhrase trainingPhraseRequest);
 
-    TrainingPhrase createTrainingPhrase(Long intentId, TrainingPhrase trainingPhrase);
+    TrainingPhrase createTrainingPhrase(UUID intentId, TrainingPhrase trainingPhrase);
 
     TrainingPhrase getTrainingPhraseById(Long trainingPhraseId);
 
     Page<TrainingPhrase> getAllTrainingPhrases(Pageable pageable);
 
-    Page<TrainingPhrase> getAllTrainingPhrasesByIntentId(Long intentId, Pageable pageable);
+    Page<TrainingPhrase> getAllTrainingPhrasesByIntentId(UUID intentId, Pageable pageable);
 
-    TrainingPhrase getTrainingPhraseByIdAndIntentId(Long intentId, Long trainingPhraseId);
+    TrainingPhrase getTrainingPhraseByIdAndIntentId(UUID intentId, Long trainingPhraseId);
 }

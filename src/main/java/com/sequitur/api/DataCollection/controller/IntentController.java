@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Tag(name = "intents", description = "Intents API")
@@ -49,7 +50,7 @@ public class IntentController {
     @GetMapping("/intents/{id}")
     public IntentResource getIntentById(
             @Parameter(description="Intent Id")
-            @PathVariable(name = "id") Long intentId) {
+            @PathVariable(name = "id") UUID intentId) {
         return convertToResource(intentService.getIntentById(intentId));
     }
 
@@ -60,13 +61,13 @@ public class IntentController {
     }
 
     @PutMapping("/intents/{id}")
-    public IntentResource updateIntent(@PathVariable(name = "id") Long intentId, @Valid @RequestBody SaveIntentResource resource) {
+    public IntentResource updateIntent(@PathVariable(name = "id") UUID intentId, @Valid @RequestBody SaveIntentResource resource) {
         Intent intent = convertToEntity(resource);
         return convertToResource(intentService.updateIntent(intentId, intent));
     }
 
     @DeleteMapping("/intents/{id}")
-    public ResponseEntity<?> deleteIntent(@PathVariable(name = "id") Long intentId) {
+    public ResponseEntity<?> deleteIntent(@PathVariable(name = "id") UUID intentId) {
         return intentService.deleteIntent(intentId);
     }
     // Auto Mapper

@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Tag(name = "responses", description = "Responses API")
@@ -37,7 +38,7 @@ public class ResponseController {
     })
     @GetMapping("/intents/{intentId}/responses")
     public Page<ResponseResource> getAllResponsesByIntentId(
-            @PathVariable(name = "intentId") Long intentId,
+            @PathVariable(name = "intentId") UUID intentId,
             Pageable pageable) {
         Page<Response> responsePage = responseService.getAllResponsesByIntentId(intentId, pageable);
         List<ResponseResource> resources = responsePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
@@ -45,27 +46,27 @@ public class ResponseController {
     }
 
     @GetMapping("/intents/{intentId}/responses/{responseId}")
-    public ResponseResource getResponseByIdAndIntentId(@PathVariable(name = "intentId") Long intentId,
+    public ResponseResource getResponseByIdAndIntentId(@PathVariable(name = "intentId") UUID intentId,
                                              @PathVariable(name = "responseId") Long responseId) {
         return convertToResource(responseService.getResponseByIdAndIntentId(intentId, responseId));
     }
 
     @PostMapping("/intents/{intentId}/responses")
-    public ResponseResource createResponse(@PathVariable(name = "intentId") Long intentId,
+    public ResponseResource createResponse(@PathVariable(name = "intentId") UUID intentId,
                                    @Valid @RequestBody SaveResponseResource resource) {
         return convertToResource(responseService.createResponse(intentId, convertToEntity(resource)));
 
     }
 
     @PutMapping("/intents/{intentId}/responses/{responseId}")
-    public ResponseResource updateResponse(@PathVariable(name = "intentId") Long intentId,
+    public ResponseResource updateResponse(@PathVariable(name = "intentId") UUID intentId,
                                    @PathVariable(name = "responseId") Long responseId,
                                    @Valid @RequestBody SaveResponseResource resource) {
         return convertToResource(responseService.updateResponse(responseId, intentId, convertToEntity(resource)));
     }
 
     @DeleteMapping("/intents/{intentId}/responses/{responseId}")
-    public ResponseEntity<?> deleteResponse(@PathVariable(name = "intentId") Long intentId,
+    public ResponseEntity<?> deleteResponse(@PathVariable(name = "intentId") UUID intentId,
                                         @PathVariable(name = "responseId") Long responseId) {
         return responseService.deleteResponse(responseId,intentId);
     }

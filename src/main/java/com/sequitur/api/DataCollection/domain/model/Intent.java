@@ -5,15 +5,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
 @Table(name = "intents")
 public class Intent {
 
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    private UUID id;
 
     private String displayName;
 
@@ -23,12 +23,11 @@ public class Intent {
     @OneToMany(mappedBy = "intent", cascade = CascadeType.ALL)
     private List<Response> responses;
 
-
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

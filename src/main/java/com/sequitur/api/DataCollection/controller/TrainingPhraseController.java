@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Tag(name = "trainingPhrases", description = "TrainingPhrases API")
@@ -38,7 +39,7 @@ public class TrainingPhraseController {
     })
     @GetMapping("/intents/{intentId}/trainingPhrases")
     public Page<TrainingPhraseResource> getAllTrainingPhrasesByIntentId(
-            @PathVariable(name = "intentId") Long intentId,
+            @PathVariable(name = "intentId") UUID intentId,
             Pageable pageable) {
         Page<TrainingPhrase> trainingPhrasePage = trainingPhraseService.getAllTrainingPhrasesByIntentId(intentId, pageable);
         List<TrainingPhraseResource> resources = trainingPhrasePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
@@ -46,27 +47,27 @@ public class TrainingPhraseController {
     }
 
     @GetMapping("/intents/{intentId}/trainingPhrases/{trainingPhraseId}")
-    public TrainingPhraseResource getTrainingPhraseByIdAndIntentId(@PathVariable(name = "intentId") Long intentId,
+    public TrainingPhraseResource getTrainingPhraseByIdAndIntentId(@PathVariable(name = "intentId") UUID intentId,
                                                        @PathVariable(name = "trainingPhraseId") Long trainingPhraseId) {
         return convertToResource(trainingPhraseService.getTrainingPhraseByIdAndIntentId(intentId, trainingPhraseId));
     }
 
     @PostMapping("/intents/{intentId}/trainingPhrases")
-    public TrainingPhraseResource createTrainingPhrase(@PathVariable(name = "intentId") Long intentId,
+    public TrainingPhraseResource createTrainingPhrase(@PathVariable(name = "intentId") UUID intentId,
                                            @Valid @RequestBody SaveTrainingPhraseResource resource) {
         return convertToResource(trainingPhraseService.createTrainingPhrase(intentId, convertToEntity(resource)));
 
     }
 
     @PutMapping("/intents/{intentId}/trainingPhrases/{trainingPhraseId}")
-    public TrainingPhraseResource updateTrainingPhrase(@PathVariable(name = "intentId") Long intentId,
+    public TrainingPhraseResource updateTrainingPhrase(@PathVariable(name = "intentId") UUID intentId,
                                            @PathVariable(name = "trainingPhraseId") Long trainingPhraseId,
                                            @Valid @RequestBody SaveTrainingPhraseResource resource) {
         return convertToResource(trainingPhraseService.updateTrainingPhrase(trainingPhraseId, intentId, convertToEntity(resource)));
     }
 
     @DeleteMapping("/intents/{intentId}/trainingPhrases/{trainingPhraseId}")
-    public ResponseEntity<?> deleteTrainingPhrase(@PathVariable(name = "intentId") Long intentId,
+    public ResponseEntity<?> deleteTrainingPhrase(@PathVariable(name = "intentId") UUID intentId,
                                             @PathVariable(name = "trainingPhraseId") Long trainingPhraseId) {
         return trainingPhraseService.deleteTrainingPhrase(trainingPhraseId,intentId);
     }
