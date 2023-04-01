@@ -48,7 +48,7 @@ public class TrainingPhraseController {
 
     @GetMapping("/intents/{intentId}/trainingPhrases/{trainingPhraseId}")
     public TrainingPhraseResource getTrainingPhraseByIdAndIntentId(@PathVariable(name = "intentId") UUID intentId,
-                                                       @PathVariable(name = "trainingPhraseId") Long trainingPhraseId) {
+                                                       @PathVariable(name = "trainingPhraseId") String trainingPhraseId) {
         return convertToResource(trainingPhraseService.getTrainingPhraseByIdAndIntentId(intentId, trainingPhraseId));
     }
 
@@ -61,14 +61,14 @@ public class TrainingPhraseController {
 
     @PutMapping("/intents/{intentId}/trainingPhrases/{trainingPhraseId}")
     public TrainingPhraseResource updateTrainingPhrase(@PathVariable(name = "intentId") UUID intentId,
-                                           @PathVariable(name = "trainingPhraseId") Long trainingPhraseId,
+                                           @PathVariable(name = "trainingPhraseId") String trainingPhraseId,
                                            @Valid @RequestBody SaveTrainingPhraseResource resource) {
         return convertToResource(trainingPhraseService.updateTrainingPhrase(trainingPhraseId, intentId, convertToEntity(resource)));
     }
 
     @DeleteMapping("/intents/{intentId}/trainingPhrases/{trainingPhraseId}")
     public ResponseEntity<?> deleteTrainingPhrase(@PathVariable(name = "intentId") UUID intentId,
-                                            @PathVariable(name = "trainingPhraseId") Long trainingPhraseId) {
+                                            @PathVariable(name = "trainingPhraseId") String trainingPhraseId) {
         return trainingPhraseService.deleteTrainingPhrase(trainingPhraseId,intentId);
     }
 

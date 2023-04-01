@@ -10,17 +10,17 @@ import java.util.UUID;
 
 public interface TrainingPhraseService {
 
-    ResponseEntity<?> deleteTrainingPhrase(Long trainingPhraseId, UUID intentId);
+    ResponseEntity<?> deleteTrainingPhrase(String trainingPhraseId, UUID intentId);
 
-    TrainingPhrase updateTrainingPhrase(Long trainingPhraseId,UUID intentId, TrainingPhrase trainingPhraseRequest);
+    TrainingPhrase updateTrainingPhrase(String trainingPhraseId,UUID intentId, TrainingPhrase trainingPhraseRequest);
 
     TrainingPhrase createTrainingPhrase(UUID intentId, TrainingPhrase trainingPhrase);
 
-    TrainingPhrase getTrainingPhraseById(Long trainingPhraseId);
+    TrainingPhrase getTrainingPhraseById(String trainingPhraseId);
 
     Page<TrainingPhrase> getAllTrainingPhrases(Pageable pageable);
 
     Page<TrainingPhrase> getAllTrainingPhrasesByIntentId(UUID intentId, Pageable pageable);
 
-    TrainingPhrase getTrainingPhraseByIdAndIntentId(UUID intentId, Long trainingPhraseId);
+    TrainingPhrase getTrainingPhraseByIdAndIntentId(UUID intentId, String trainingPhraseId);
 }

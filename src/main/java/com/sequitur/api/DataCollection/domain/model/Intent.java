@@ -4,6 +4,7 @@ import ch.qos.logback.classic.spi.LoggingEventVO;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,5 +55,7 @@ public class Intent {
     public void setResponses(List<Response> responses) {
         this.responses = responses;
     }
+
+
 
 }

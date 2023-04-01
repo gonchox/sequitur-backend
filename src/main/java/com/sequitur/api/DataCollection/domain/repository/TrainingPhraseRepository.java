@@ -11,9 +11,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface TrainingPhraseRepository extends JpaRepository<TrainingPhrase, Long> {
+public interface TrainingPhraseRepository extends JpaRepository<TrainingPhrase, String> {
 
     Page<TrainingPhrase> findByIntentId(UUID intentId, Pageable pageable);
 
-    Optional<TrainingPhrase> findByIdAndIntentId(Long id, UUID intentId);
+    Optional<TrainingPhrase> findByIdAndIntentId(String id, UUID intentId);
 }

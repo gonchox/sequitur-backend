@@ -10,8 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "training_phrases")
 public class TrainingPhrase {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String text;
 
@@ -20,11 +19,11 @@ public class TrainingPhrase {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Intent intent;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
