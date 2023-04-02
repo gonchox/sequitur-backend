@@ -9,17 +9,17 @@ import java.util.UUID;
 
 public interface ResponseService {
 
-    ResponseEntity<?> deleteResponse(Long responseId, UUID intentId);
+    ResponseEntity<?> deleteResponse(String responseId, UUID intentId);
 
-    Response updateResponse(Long responseId, UUID intentId, Response responseRequest);
+    Response updateResponse(String responseId, UUID intentId, Response responseRequest);
 
     Response createResponse(UUID intentId, Response response);
 
-    Response getResponseById(Long responseId);
+    Response getResponseById(String responseId);
 
     Page<Response> getAllResponses(Pageable pageable);
 
     Page<Response> getAllResponsesByIntentId(UUID intentId, Pageable pageable);
 
-    Response getResponseByIdAndIntentId(UUID intentId, Long responseId);
+    Response getResponseByIdAndIntentId(UUID intentId, String responseId);
 }

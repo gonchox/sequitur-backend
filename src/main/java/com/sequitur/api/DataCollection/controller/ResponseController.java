@@ -47,7 +47,7 @@ public class ResponseController {
 
     @GetMapping("/intents/{intentId}/responses/{responseId}")
     public ResponseResource getResponseByIdAndIntentId(@PathVariable(name = "intentId") UUID intentId,
-                                             @PathVariable(name = "responseId") Long responseId) {
+                                             @PathVariable(name = "responseId") String responseId) {
         return convertToResource(responseService.getResponseByIdAndIntentId(intentId, responseId));
     }
 
@@ -60,14 +60,14 @@ public class ResponseController {
 
     @PutMapping("/intents/{intentId}/responses/{responseId}")
     public ResponseResource updateResponse(@PathVariable(name = "intentId") UUID intentId,
-                                   @PathVariable(name = "responseId") Long responseId,
+                                   @PathVariable(name = "responseId") String responseId,
                                    @Valid @RequestBody SaveResponseResource resource) {
         return convertToResource(responseService.updateResponse(responseId, intentId, convertToEntity(resource)));
     }
 
     @DeleteMapping("/intents/{intentId}/responses/{responseId}")
     public ResponseEntity<?> deleteResponse(@PathVariable(name = "intentId") UUID intentId,
-                                        @PathVariable(name = "responseId") Long responseId) {
+                                        @PathVariable(name = "responseId") String responseId) {
         return responseService.deleteResponse(responseId,intentId);
     }
 

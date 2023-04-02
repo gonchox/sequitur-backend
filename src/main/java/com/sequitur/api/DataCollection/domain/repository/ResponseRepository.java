@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ResponseRepository extends JpaRepository<Response, Long> {
+public interface ResponseRepository extends JpaRepository<Response, String> {
 
     Page<Response> findByIntentId(UUID intentId, Pageable pageable);
 
-    Optional<Response> findByIdAndIntentId(Long id, UUID intentId);
+    Optional<Response> findByIdAndIntentId(String id, UUID intentId);
 }
